@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rotating KangHee</title>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background: #fff;
+        font-family: sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .controls {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 14px;
+        display: flex;
+        gap: 10px;
+        z-index: 1000;
+        white-space: nowrap;
+    }
+
+    .controls input {
+        margin-right: 4px;
+    }
+
+    img {
+        position: absolute;
+        animation: spin linear infinite;
+        animation-duration: 5s;
+        transform-origin: center center;
+    }
+
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    /* 마구자비 위치 + 서로 다른 크기 크게 설정 */
+    #img1 {
+        top: 5%;
+        left: 10%;
+        width: 90vw;
+    }
+
+    #img2 {
+        top: 50%;
+        left: -30%;
+        width: 120vw;
+    }
+
+    #img3 {
+        top: 20%;
+        left: 55%;
+        width: 80vw;
+    }
+
+    #img4 {
+        top: 65%;
+        left: 50%;
+        width: 55vw;
+    }
+
+    #img5 {
+        top: 30%;
+        left: 7%;
+        width: 60vw;
+    }
+</style>
+</head>
+<body>
+
+    <div class="controls">
+        <label><input type="radio" name="speed" value="7s"> 느림</label>
+        <label><input type="radio" name="speed" value="4s" checked> 보통</label>
+        <label><input type="radio" name="speed" value="0.3s"> 빠름</label>
+    </div>
+
+    <img src="kanghee.png" id="img1">
+    <img src="kanghee2.png" id="img2">
+    <img src="kanghee3.png" id="img3">
+    <img src="kanghee4.png" id="img4">
+    <img src="kanghee5.png" id="img5">
+
+    <script>
+        const radios = document.querySelectorAll('input[name="speed"]');
+        const images = document.querySelectorAll('img');
+
+        radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                const speed = radio.value;
+                images.forEach(img => {
+                    img.style.animationDuration = speed;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
